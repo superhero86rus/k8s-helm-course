@@ -42,5 +42,16 @@ kubectl rollout restart deployment short-app-deployment
 # NodePort - доступ к контейнерам извне по порту
 # LoadBalancer - доступ к одному сервису извне
 # Ingress (Nginx, AWS, GCE) - доступ к набору сервисов извне
+ 
+ # Для того чтобы мы обращались по имени хоста к приложению, нужно сконфигурировать minikube и hosts файл
+ minikube addons list
 
+ minikube addons enable ingress
+
+ sudo nano /etc/hosts
+ # Прописываем туда minikube ip
+ # 192.168.49.2    demo.test
+
+kubectl apply -f ingress.yml
+kubectl get ingress
 ```
