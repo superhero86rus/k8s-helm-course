@@ -37,4 +37,10 @@ kubectl rollout history deployment short-app-deployment
 # Обновляем императивным путем (меняем образ у деплоймента)
 kubectl set image deployment.apps/short-app-deployment short-app=antonlarichev/short-app:latest
 kubectl rollout restart deployment short-app-deployment
+
+# ClusterIP - доступ к контейнерам из других обьектов
+# NodePort - доступ к контейнерам извне по порту
+# LoadBalancer - доступ к одному сервису извне
+# Ingress (Nginx, AWS, GCE) - доступ к набору сервисов извне
+
 ```
