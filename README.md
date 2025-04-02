@@ -86,5 +86,16 @@ create table "Link" (
 );
 ```
 ```bash
+# Создание секрета
+kubectl create secret generic pg-secret --from-literal PASSWORD=my_pass
+kubectl get secrets
+kubectl describe decret pg-secret
 
+# Как декодировать секрет?
+kubectl get secrets pg-secret --template={{.data.PASSWORD}} | base64 -d
+
+# Кодируем секрет в base64
+echo -n demo | base64
+
+kubectl apply -f ./kube-config/postgres-secret.yml
 ```
