@@ -98,4 +98,6 @@ kubectl get secrets pg-secret --template={{.data.PASSWORD}} | base64 -d
 echo -n demo | base64
 
 kubectl apply -f ./kube-config/postgres-secret.yml
+
+echo -n postgresql://demo:demo@postgres-clusterip:5432/demo | base64
 ```

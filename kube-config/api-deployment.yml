@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: short-api-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      components: backend
+  template:
+    metadata:
+      labels:
+        components: backend
+    spec:
+      containers:
+      - name: short-api
+        image: antonlarichev/short-api:v1.0
+        ports:
+          - containerPort: 3000
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+        env:
+          - name: database-url
+            valueFrom:
+              secretKeyRef:
+                name: short-api-secret
+                key: database-url
+# database_url
+# postgresql://user:password@url:5432/db
+# postgresql://demo:demo@postgres-clusterip:5432/demo

@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: pgadmin-clusterip
+  name: short-api-clusterip
 spec:
   type: ClusterIP
   ports:
-    - port: 80
+    - port: 3000
       protocol: TCP
   selector:
-    components: pgadmin
+    components: backend
