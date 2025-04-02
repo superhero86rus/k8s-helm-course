@@ -100,4 +100,15 @@ echo -n demo | base64
 kubectl apply -f ./kube-config/postgres-secret.yml
 
 echo -n postgresql://demo:demo@postgres-clusterip:5432/demo | base64
+
+# Применяем API
+kubectl apply -f ./kube-config/api-secret.yml
+kubectl apply -f ./kube-config/api-service.yml 
+kubectl apply -f ./kube-config/api-deployment.yml 
+
+# Посмотреть логи kubectl logs pods/postgres-deployment-7bb79b5cd-q8wxp    
+
+# Добавляем маршрут в ingress до api
+kubectl apply -f ./kube-config/app-deployment.yml 
+kubectl apply -f ./kube-config/ingress.yml 
 ```
