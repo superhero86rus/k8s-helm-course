@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-pvc
+spec:
+  resources:
+    requests:
+      storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce # Может использовать 1 инстанс (нода k8s)
+    # ReadOnlyMany - несколько инстансов может читать
+    # ReadWriteMany - несколько инстансов может читать и писать в хранилище

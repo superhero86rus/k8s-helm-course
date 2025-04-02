@@ -54,4 +54,37 @@ kubectl rollout restart deployment short-app-deployment
 
 kubectl apply -f ingress.yml
 kubectl get ingress
+
+# Port Forwarding из кластера на нашу машину
+kubectl port-forward pods/postgres-deployment-5b645bb98c-4jqv8 5432:5432
+docker pull dpage/pgadmin4
+
+# Отключили форвард и перезапускаем
+kubectl rollout restart deployment postgres-deployment
+
+# Volume - связан с контейнером - выделенная область внутри пода
+# Persistent Volume - отдельное хранилище (статические и динамические)
+# Persistent Volume Claim - связка Persistent Volume и POD
+
+kubectl get storageclasses.storage.k8s.io
+
+# Создаем deployment, PVC и таблицу
+kubectl get persistentvolumeclaims
+
+kubectl apply -f kube-config/postgres-pvc.yml        
+kubectl apply -f kube-config/postgres-deployment.yml
+
+kubectl port-forward pod/postgres-deployment-7bb79b5cd-q8wxp 5432:5432
+```
+```sql
+create table "Link" (
+	"id" serial not null,
+	"url" text not null,
+	"hash" text not null,
+	
+	constraint "Link_pkey" primary key ("id") 
+);
+```
+```bash
+
 ```
