@@ -130,8 +130,10 @@ kubectl get po --watch
 # $? - показать результат выполнения предыдущей команды
 
 # Автокомплит kubectl в Zsh
+# Автокомплит Helm в Zsh
 # Добавляем .zshrc
 # source <(kubectl completion zsh)
+# source <(helm completion zsh)
 omz reload
 ```
 
@@ -152,4 +154,27 @@ helm show all stable/mysql
 
 # Создаем каркас чарта
 helm create short-service
+
+# Установка релиза
+helm install short-service-release short-service 
+
+# Release - информация о релизе
+# Values - переменные из values.yml
+# Chart - данные из Chart.yml
+# Files - доступ к любым файлам
+# Capabilities - информация о кластере
+# Tempalte - информация о текущем шаблоне
+
+# Инфо о релизах
+helm ls
+
+# Обновление релиза
+# Дебаг с просмотром полученных yaml манифестов
+helm install --debug --dry-run short-service-release ./short-service 
+
+# Переопределение
+helm install --debug --dry-run short-service-release ./short-service --set name=Vasia
+
+# Обновление
+helm upgrade short-service-release ./short-service
 ```

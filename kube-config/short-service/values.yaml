@@ -1,0 +1,27 @@
+name: Aleksandr
+surname: Kotov
+
+app:
+  name: short-app
+  image: antonlarichev/short-app
+  version: v1.4
+  components: frontend
+  port: 80
+  replicas: 1
+  limits:
+    memory: "128Mi"
+    cpu: "500m"
+
+env: production
+
+value:
+  requirements:
+    limits:
+      memory: "128Mi"
+      cpu: "100m"
+
+users:
+  - name: Anton
+    role: admin
+  - name: Vasia
+    role: manager
