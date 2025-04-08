@@ -1,5 +1,6 @@
 # k8s-helm-course
 
+### Основы
 ```bash
 
 # Устанавливаем minukube (кластер с одной нодой, для обучения)
@@ -111,4 +112,13 @@ kubectl apply -f ./kube-config/api-deployment.yml
 # Добавляем маршрут в ingress до api
 kubectl apply -f ./kube-config/app-deployment.yml 
 kubectl apply -f ./kube-config/ingress.yml 
+```
+
+### Эксплуатация
+```bash
+# Проваливаемся в терминао контейнера
+kubectl exec -it pod/short-api-deployment-5c74fd6c49-25kgd -- /bin/bash
+
+# ConfigMap
+```
 ```

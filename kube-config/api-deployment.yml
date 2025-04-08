@@ -27,6 +27,15 @@ spec:
               secretKeyRef:
                 name: short-api-secret
                 key: database-url
+        volumeMounts:
+          - name: test
+            mountPath: /etc/test
+            readOnly: true
+      volumes:
+        - name: test
+          configMap:
+            name: demo-config
+
 # database_url
 # postgresql://user:password@url:5432/db
 # postgresql://demo:demo@postgres-clusterip:5432/demo
