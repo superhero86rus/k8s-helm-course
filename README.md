@@ -149,4 +149,7 @@ helm install stable/mysql --generate-name
 # Смотрим что в составе чарта
 helm show chart stable/mysql
 helm show all stable/mysql
+
+# Создаем каркас чарта
+helm create short-service
 ```
