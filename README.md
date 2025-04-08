@@ -111,7 +111,7 @@ kubectl apply -f ./kube-config/api-deployment.yml
 
 # Добавляем маршрут в ingress до api
 kubectl apply -f ./kube-config/app-deployment.yml 
-kubectl apply -f ./kube-config/ingress.yml 
+kubectl apply -f ./kube-config/ingress.yml
 ```
 
 ### Эксплуатация
@@ -119,6 +119,34 @@ kubectl apply -f ./kube-config/ingress.yml
 # Проваливаемся в терминао контейнера
 kubectl exec -it pod/short-api-deployment-5c74fd6c49-25kgd -- /bin/bash
 
-# ConfigMap
+# Смотрит историю ревизий и делаем откат
+kubectl rollout history deployment short-api-deployment
+kubectl rollout undo deployment --to-revision=2
+
+# Следим за подами
+kubectl get po --watch
+
+# Health Check
+# $? - показать результат выполнения предыдущей команды
+
+# Автокомплит kubectl в Zsh
+# Добавляем .zshrc
+# source <(kubectl completion zsh)
+omz reload
 ```
+
+```bash
+# HELM - менеджер пакетов для Kubernetes
+# Первым делом добавляем стандартный репозиторий helm
+helm repo add stable https://charts.helm.sh/stable
+helm repo list
+helm repo update
+# Поиск чартов
+helm search repo mysql
+
+# Устанавливаем чарт
+helm install stable/mysql --generate-name
+# Смотрим что в составе чарта
+helm show chart stable/mysql
+helm show all stable/mysql
 ```

@@ -31,6 +31,18 @@ spec:
           - name: test
             mountPath: /etc/test
             readOnly: true
+        livenessProbe:
+          # exec
+          # httpGet
+          exec:
+            command:
+              - curl
+              - --fail # Возвращаем код ответа
+              - http://localhost:3000/api
+          initialDelaySeconds: 30
+          periodSeconds: 5
+          failureThreshold: 1 # Доспустимое число ошибок
+
       volumes:
         - name: test
           configMap:
