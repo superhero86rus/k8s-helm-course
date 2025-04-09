@@ -12,16 +12,26 @@ app:
     memory: "128Mi"
     cpu: "500m"
 
-env: production
+api:
+  name: short-api
+  image: antonlarichev/short-api
+  version: v1.0
+  components: backend
+  port: 3000
+  replicas: 1
+  limits:
+    memory: "512Mi"
+    cpu: "200m"
+  env: database_url
 
-value:
-  requirements:
-    limits:
-      memory: "128Mi"
-      cpu: "100m"
+postgres:
+  name: short-api
+  image: postgres
+  version: 16.0
+  components: postgres
+  port: 5432
 
-users:
-  - name: Anton
-    role: admin
-  - name: Vasia
-    role: manager
+database:
+  user: demo
+  password: demo
+  db: demo
