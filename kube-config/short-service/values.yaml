@@ -22,14 +22,22 @@ api:
   limits:
     memory: "512Mi"
     cpu: "200m"
-  env: database_url
+  envs:
+    - database-url
 
 postgres:
-  name: short-api
+  name: postgres
   image: postgres
   version: 16.0
   components: postgres
   port: 5432
+  limits:
+    memory: "500Mi"
+    cpu: "300m"
+  envs:
+    - postgres-db
+    - postgres-user
+    - postgres-password
 
 database:
   user: demo

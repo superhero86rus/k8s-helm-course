@@ -21,9 +21,9 @@ spec:
           limits: {{.Values.api.limits | toYaml | nindent 12}}
         env:
           {{- range .Values.api.envs}}
-          {{- $data := dict "name" $.Values.api.name "env" .}}
-          {{- include "env.template" $data | indent 12 }}
-          {{- end}}
+          {{- $data := dict "name" $.Values.api.name "env" . }}
+          {{- include "env.template" $data | indent 10}}
+          {{- end }}
         livenessProbe:
           exec:
             command:
