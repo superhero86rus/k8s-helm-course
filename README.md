@@ -177,4 +177,31 @@ helm install --debug --dry-run short-service-release ./short-service --set name=
 
 # Обновление
 helm upgrade short-service-release ./short-service
+
+# Упаковываем чарт и индексируем
+helm package ../kube-config/short-service/
+helm repo index .
+
+# Использование репозитория
+helm repo add superhero86 https://raw.githubusercontent.com/superhero86rus/helm-repo/refs/heads/main
+
+# Сопровождение релиза
+# Удаляем все из k8s
+helm uninstall short-service-release 
+
+# Установка
+helm install short-app-release superhero86/short-service
+
+# История
+helm history short-app-release
+
+# Откат до первой ревизии
+helm rollback short-app-release 1
+
+# Тесты
+helm lint short-service
+# Превью как при --debug --dry-run
+helm template test ../kube-config/short-service
+# Полный рендер
+helm get all short-app-release
 ```
