@@ -13,7 +13,7 @@ spec:
         components: {{.Values.api.components}}
     spec:
       containers:
-      - name: short-api
+      - name: {{.Values.api.name}}
         image: "{{.Values.api.image}}:{{.Values.api.version}}"
         ports:
           - containerPort: {{.Values.api.port}}

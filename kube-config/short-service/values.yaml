@@ -35,11 +35,12 @@ postgres:
     memory: "500Mi"
     cpu: "300m"
   envs:
-    - postgres-db
-    - postgres-user
-    - postgres-password
+    - POSTGRES_DB
+    - POSTGRES_USER
+    - POSTGRES_PASSWORD
 
 database:
   user: demo
   password: demo
   db: demo
+  host: postgres-clusterip
