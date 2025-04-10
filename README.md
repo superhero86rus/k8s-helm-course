@@ -189,19 +189,33 @@ helm repo add superhero86 https://raw.githubusercontent.com/superhero86rus/helm-
 # Удаляем все из k8s
 helm uninstall short-service-release 
 
-# Установка
-helm install short-app-release superhero86/short-service
+# Установка из репозитория (не забыть обновить его локально)
+helm install short-service-release superhero86/short-service
+
+# Установка определенной версии
+helm install short-service-release superhero86/short-service --version="1.0.2"
 
 # История
-helm history short-app-release
+helm history short-service-release
 
 # Откат до первой ревизии
-helm rollback short-app-release 1
+helm rollback short-service-release 1
 
 # Тесты
 helm lint short-service
 # Превью как при --debug --dry-run
 helm template test ../kube-config/short-service
 # Полный рендер
-helm get all short-app-release
+helm get all short-service-release
+
+# Тесты
+# Создаем отдельный под, который будет делать запросы на наш api
+# Создаем отдельную папку tests внутри templates нашего чарта
+# Обновляем чарт
+helm upgrade short-service-release ./short-service
+
+helm test short-service-release
+
+# Пушим обновление в GitHub, обновляем репозитории и устанавливаем
+helm repo update
 ```

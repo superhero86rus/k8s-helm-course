@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: short-app-ingress
+  name: {{.Values.app.name}}-ingress
   annotations:
     nginx.ingress.kubernetes.io/add-base-url: "true"
 spec:
@@ -14,13 +14,13 @@ spec:
         path: "/"
         backend:
           service:
-            name: short-app-clusterip
+            name: {{.Values.app.name}}-clusterip
             port: 
               number: 80
       - pathType: Prefix
         path: "/api"
         backend:
           service:
-            name: short-api-clusterip
+            name: {{.Values.api.name}}-clusterip
             port: 
-              number: 3000
+              number: {{.Values.api.port}}
