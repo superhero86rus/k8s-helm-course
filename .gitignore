@@ -1,1 +1,3 @@
 /kube-config/helm-pkg
+/kube-config/.sops.yaml
+/kube-config/secrets.yml

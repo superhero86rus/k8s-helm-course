@@ -219,3 +219,34 @@ helm test short-service-release
 # Пушим обновление в GitHub, обновляем репозитории и устанавливаем
 helm repo update
 ```
+
+### Секреты
+```bash
+# Используем плагин helm-secrets
+helm plugin install https://github.com/jkroepke/helm-secrets
+
+# Генерируем приватный ключ, для подписи секретов
+gpg --gen-key
+
+# Проверяем
+gpg --list-keys
+
+# Устанавливаем Mozilla Sops
+wget https://github.com/mozilla/sops/releases/download/v3.7.1/sops_3.7.1_amd64.deb
+sudo apt install ./sops_3.7.1_amd64.deb
+
+# Создаем secrets.yml (открывать файл с паролем который мы задали при создании файла)
+sops -p <GPG_KEY> secrets.yml
+helm secrets decrypt
+helm secrets edit
+
+# Преобразование файла
+helm secrets decrypt -i secrets.yml
+helm secrets encrypt -i secrets.yml
+
+# Чтобы шифрование и расшифровка работали без проблем - нужно создать sops файл и вставить в него ключ gpg (.sops.yaml)
+# Расширение yaml (не yml)
+helm secrets upgrade short-service-release ./short-service -f secrets.yml
+kubectl get secrets short-api-secret --template={{.data.database-url}} | base64 -d
+
+```
